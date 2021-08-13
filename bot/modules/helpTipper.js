@@ -12,6 +12,7 @@ exports.tiphelp = {
       '  **Bitweb (BTE) Tipper**\n    Transaction Fees: **' + bteFee + '**\n' +        
       '__**Commands**__\n' +
       '  **' + prefix + 'tipbte** : Displays This Message\n' +
+      '  **' + prefix + 'tipbte price** : get bitweb price\n' +
       '  **' + prefix + 'tipbte balance** : get your balance\n' +
       '  **' + prefix + 'tipbte deposit** : get address for your deposits\n' +
       '  **' + prefix + 'tipbte withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n' +

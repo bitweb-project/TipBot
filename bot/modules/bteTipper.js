@@ -24,7 +24,7 @@ exports.tipbte = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Bitweb (BTE) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbte** : Displays This Message\n    **!tipbte balance** : get your balance\n    **!tipbte deposit** : get address for your deposits\n    **!tipbte withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbte <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbte private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
+        '__**Bitweb (BTE) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbte** : Displays This Message\n    **!tipbte price** : get bitweb price\n    **!tipbte balance** : get your balance\n    **!tipbte deposit** : get address for your deposits\n    **!tipbte withdraw1 <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbte <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbte private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
       channelwarning = 'Please use <#bot-spam> or DMs to talk to bots.';
     switch (subcommand) {
       case 'help':
@@ -32,6 +32,9 @@ exports.tipbte = {
         break;
       case 'balance':
         doBalance(msg, tipper);
+        break;
+      case 'price':
+        getPrice(msg, tipper);
         break;
       case 'deposit':
         privateorSpamChannel(msg, channelwarning, doDeposit, [tipper]);
@@ -44,7 +47,52 @@ exports.tipbte = {
     }
   }
 };
+//--Market Cap--
+function getPrice(message, tipper) {
+  var getmarketdata = getbteprice()
+  message.channel.send({ embed: {
+    description: '**:bank::money_with_wings::moneybag:Bitweb (BTE) Price!:moneybag::money_with_wings::bank:**',
+    color: 1363892,
+    fields: [
+      {
+        name: 'Current BTE/BTC price:',
+        value: '**'+ getmarketdata[0] + ' BTC' + '**',
+        inline: false
+      },
+      {
+        name: 'Current BTE/USD price:',
+        value: '**'+'$'+ getmarketdata[1] + '**',
+        inline: false
+      }
+    ]
+  } });
+}
 
+function getbteprice(){
+  var arrresult = new Array();
+  arrresult = [];
+  var coin_name = "bitweb";
+  var coin_ticker = "bte"
+  var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  var xmlHttp1 = new XMLHttpRequest();
+  var price1 = `https://api.coinpaprika.com/v1/ticker/${coin_ticker}-${coin_name}`;
+
+  xmlHttp1.open( "GET", price1, false ); 
+  xmlHttp1.send( null );
+  var data1 = xmlHttp1.responseText;
+  var jsonres1 = JSON.parse(data1);
+  var checkprice1 = Object.keys(jsonres1).length;
+
+  if (checkprice1>0){
+     //arrresult[0] = eval("jsonres1."+ coin_name + ".btc;")
+     //arrresult[1] = (parseFloat(jsonres1.bitcoin.usd)).toFixed(8);
+      arrresult[0] = (parseFloat(jsonres1.price_btc)).toFixed(8);
+      arrresult[1] = (parseFloat(jsonres1.price_usd)).toFixed(8);
+  }
+
+  return arrresult;
+}
+//--
 function privateorSpamChannel(message, wrongchannelmsg, fn, args) {
   if (!inPrivateorSpamChannel(message)) {
     message.reply(wrongchannelmsg);
