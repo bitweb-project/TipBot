@@ -1,6 +1,8 @@
 # Bot for Discord communities to facilitate crypto coin tipping!
 (This README will be updated along with bot updates)
 
+add it to yourself discord server：https://discord.com/oauth2/authorize?client_id=849345788533932062&scope=bot&permissions=27648
+
 Features:
 - Tipbot for any coin running the bitcoind client.
     - Help message `!tip`.
