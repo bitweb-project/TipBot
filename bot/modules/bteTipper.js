@@ -24,7 +24,7 @@ exports.tipbte = {
         }),
       subcommand = words.length >= 2 ? words[1] : 'help',
       helpmsg =
-        '__**Bitweb (BTE) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbte** : Displays This Message\n    **!tipbte price** : get bitweb price\n    **!tipbte balance** : get your balance\n    **!tipbte deposit** : get address for your deposits\n    **!tipbte withdraw1 <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbte <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbte private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
+        '__**Bitweb (BTE) Tipper**__\nTransaction Fees: **' + paytxfee + '**\n    **!tipbte** : Displays This Message\n    **!tipbte price** : get bitweb price\n    **!tipbte balance** : get your balance\n    **!tipbte deposit** : get address for your deposits\n    **!tipbte withdraw <ADDRESS> <AMOUNT>** : withdraw coins to specified address\n    **!tipbte <@user> <amount>** :mention a user with @ and then the amount to tip them\n    **!tipbte private <user> <amount>** : put private before Mentioning a user to tip them privately.\n\n    **<> : Replace with appropriate value.**',
       channelwarning = 'Please use <#bot-spam> or DMs to talk to bots.';
     switch (subcommand) {
       case 'help':
