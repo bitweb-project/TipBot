@@ -60,8 +60,18 @@ function getPrice(message, tipper) {
         inline: false
       },
       {
+        name: '24h Vol:',
+        value: '**'+ getmarketdata[2] + ' BTC' + '**',
+        inline: false
+      },
+      {
         name: 'Current BTE/USD price:',
         value: '**'+'$'+ getmarketdata[1] + '**',
+        inline: false
+      },
+      {
+        name: '24h Vol:',
+        value: '**'+'$'+ getmarketdata[3] + '**',
         inline: false
       }
     ]
@@ -75,7 +85,7 @@ function getbteprice(){
   var coin_ticker = "bte"
   var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
   var xmlHttp1 = new XMLHttpRequest();
-  var price1 = `https://api.coinpaprika.com/v1/ticker/${coin_ticker}-${coin_name}`;
+  var price1 = `https://api.coingecko.com/api/v3/simple/price?ids=${coin_name}&vs_currencies=usd,btc&include_24hr_vol=true`;
 
   xmlHttp1.open( "GET", price1, false ); 
   xmlHttp1.send( null );
@@ -86,8 +96,10 @@ function getbteprice(){
   if (checkprice1>0){
      //arrresult[0] = eval("jsonres1."+ coin_name + ".btc;")
      //arrresult[1] = (parseFloat(jsonres1.bitcoin.usd)).toFixed(8);
-      arrresult[0] = (parseFloat(jsonres1.price_btc)).toFixed(8);
-      arrresult[1] = (parseFloat(jsonres1.price_usd)).toFixed(8);
+      arrresult[0] = (eval("jsonres1."+ coin_name + ".btc;")).toFixed(8);
+      arrresult[2] = (parseFloat(jsonres1.bitweb.btc_24h_vol)).toFixed(8);
+      arrresult[1] = (parseFloat(jsonres1.bitweb.usd)).toFixed(8);
+      arrresult[3] = (parseFloat(jsonres1.bitweb.usd_24h_vol)).toFixed(7);
   }
 
   return arrresult;
