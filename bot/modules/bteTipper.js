@@ -50,8 +50,7 @@ exports.tipbte = {
 //--Market Cap--
 function getPrice(message, tipper) {
   var getmarketdata = getbteprice();
-  var getmarketdata2 = getbteprice2();
-  var getmarketdata3 = getbteprice3()
+  var getmarketdata2 = getbteprice2()
 
   message.channel.send({ embed: {
     description: '**:bank::money_with_wings::moneybag:Coinegecko Bitweb (BTE) Price!:moneybag::money_with_wings::bank:**',
@@ -96,22 +95,6 @@ function getPrice(message, tipper) {
 	  {
         name: '24h Vol:',
         value: '**'+'$'+ getmarketdata2[3] + '**',
-        inline: false
-      }
-    ]
-  } });
-  message.channel.send({ embed: {
-    description: '**:bank::money_with_wings::moneybag:Coineal Bitweb (BTE) Price!:moneybag::money_with_wings::bank:**',
-    color: 1363892,
-    fields: [
-      {
-        name: 'Current BTE/CNV price:',
-        value: '**'+ getmarketdata3[0] + ' CNV' + '**',
-        inline: false
-      },
-      {
-        name: '24h Vol:',
-        value: '**'+ getmarketdata3[1] + ' CNV' + '**',
         inline: false
       }
     ]
@@ -166,29 +149,6 @@ function getbteprice2(){
       arrresult[0] = (parseFloat(jsonres1.price_btc)).toFixed(8);
       arrresult[1] = (parseFloat(jsonres1.price_usd)).toFixed(8);
 	  arrresult[3] = (parseFloat(jsonres1.volume_24h_usd)).toFixed(7);
-  }
-
-  return arrresult;
-}
-
-function getbteprice3(){
-  var arrresult = new Array();
-  arrresult = [];
-  var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-  var xmlHttp1 = new XMLHttpRequest();
-  var price1 = `https://exchange-open-api.coineal.com/open/api/get_ticker?symbol=btecnv`;
-
-  xmlHttp1.open( "GET", price1, false ); 
-  xmlHttp1.send( null );
-  var data1 = xmlHttp1.responseText;
-  var jsonres1 = JSON.parse(data1);
-  var checkprice1 = Object.keys(jsonres1).length;
-
-  if (checkprice1>0){
-     //arrresult[0] = eval("jsonres1."+ coin_name + ".btc;")
-     //arrresult[1] = (parseFloat(jsonres1.bitcoin.usd)).toFixed(8);
-      arrresult[0] = (parseFloat(jsonres1.data.high)).toFixed(8);
-	  arrresult[1] = (parseFloat(jsonres1.data.amount)).toFixed(8);
   }
 
   return arrresult;
@@ -521,9 +481,9 @@ function getValidatedAmount(amount) {
 }
 
 function txLink(txId) {
-  return 'https://explorer.bitwebcore.org/tx/' + txId;
+  return 'https://explorer.bitwebcore.net/tx/' + txId;
 }
 
 function addyLink(address) {
-  return 'https://explorer.bitwebcore.org/address/' + address;
+  return 'https://explorer.bitwebcore.net/address/' + address;
 }
